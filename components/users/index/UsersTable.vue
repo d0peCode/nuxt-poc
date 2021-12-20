@@ -2,24 +2,23 @@
     <div>
         <table class="table">
             <tr>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
+                <th scope="col">name</th>
+                <th scope="col">favoriteColor</th>
+                <th scope="col">timestamp</th>
             </tr>
-            <tr class="data">
-                <td>Alfreds </td>
-                <td>Maria </td>
-                <td>Germany</td>
-            </tr>
-            <tr class="data">
-                <td>Centro  </td>
-                <td>Francisco </td>
-                <td>Mexico</td>
+            <tr class="data" v-for="user in users" :key="user.id">
+                <td>{{ user.name }}</td>
+                <td>{{ user.favoriteColor }}</td>
+                <td>{{ user.timestamp }}</td>
             </tr>
         </table>
     </div>
-
 </template>
+<script lang="ts" setup>
+const props = defineProps({
+    users: Object
+})
+</script>
 <style lang="scss">
 .table {
     width: 300px;
