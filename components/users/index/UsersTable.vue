@@ -1,23 +1,25 @@
 <template>
     <div>
         <table class="table">
-            <tr>
-                <th scope="col">name</th>
-                <th scope="col">favoriteColor</th>
-                <th scope="col">timestamp</th>
-            </tr>
-            <tr class="data" v-for="user in users" :key="user.id">
-                <td>{{ user.name }}</td>
-                <td>{{ user.favoriteColor }}</td>
-                <td>{{ user.timestamp }}</td>
-            </tr>
+            <thead>
+                <tr>
+                  <th scope="col">name</th>
+                  <th scope="col">favoriteColor</th>
+                  <th scope="col">timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="data" v-for="user in users" :key="user.id">
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.favoriteColor }}</td>
+                  <td>{{ user.timestamp }}</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </template>
 <script lang="ts" setup>
-const props = defineProps({
-    users: Object
-})
+defineProps({ users: Object })
 </script>
 <style lang="scss">
 .table {

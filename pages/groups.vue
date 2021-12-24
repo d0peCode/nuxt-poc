@@ -1,26 +1,31 @@
 <template>
-    <h1>{{ 'yo yo' }}</h1>
+    <div class="row">
+      <LeftPane :users="state.users.data" :groups="state.groups.data" />
+      <RightPane />
+    </div>
 </template>
 <script lang="ts" setup>
-enum AppThemes {
-    Light = '#fbf4f4',
-    Mid = '#aba7a7',
-    Dark = '#000000'
+import LeftPane from '@/components/groups/LeftPane'
+import RightPane from '@/components/groups/RightPane'
+
+
+const getNotAssignedUsers = (users, groups) => {
+  return users.filter(user => {
+    for (let i = 0, l = groups.length; i < l; i++) {
+      if (groups[i].usersIds.includes(user.id)) {
+        return false
+      }
+    }
+    return true
+  })
 }
 
-// on server and client
-console.log('log from setup, 0 boilerplate style')
 
-// auto import dont need to import useAsyncData..
-// on server only
-useAsyncData('logExample', () => {
-    console.log('log from async data, on server..', AppThemes.Dark)
+const state = reactive({
+  users: await useAsyncData('users', () => $fetch('/api/users')),
+  groups: await useAsyncData('groups', () => $fetch('/api/groups')),
+  notAssignedUsers: []
 })
 
-//hooks from vue need imports
-import { onMounted } from 'vue'
-// client only
-onMounted(() => {
-    console.log('log on mounted hook')
-})
+state.notAssignedUsers = getNotAssignedUsers(state.users.data, state.groups.data)
 </script>

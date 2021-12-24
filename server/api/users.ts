@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 
-interface User {
+export interface User {
     name: string,
     favouriteColor: string
 }
