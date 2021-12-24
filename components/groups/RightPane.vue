@@ -54,7 +54,6 @@ const selectedGroupChanged = () => {
 }
 
 const removeFromGroup = () => {
-
   emit('removeFromGroup', state.currentUsers)
   state.currentUsers = state.currentUsers.filter(userId => ( !state.currentUsers.includes(userId) ))
   getUsersOfSelectedGroup()
