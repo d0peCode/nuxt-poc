@@ -2,13 +2,14 @@
   <div class="col">
     <h1>left pane</h1>
 
-    <label for="selectedUsers">UnAssignedUsers</label>
+    <label for="selectedUsers">UnassignedUsers</label>
     <br />
 
     <select id="selectedUsers" multiple v-model="state.selectedUsers">
       <option v-for="user in users" :value="user.id">{{ user.name }}</option>
     </select>
-    <pre>{{ state.selectedUsers }}</pre>
+    <br />
+
     <button @click="assignToGroup" :disabled="!state.selectedUsers.length">
       assign to group
     </button>

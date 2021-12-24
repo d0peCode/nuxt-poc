@@ -18,8 +18,6 @@
       </select><br />
       <button :disabled="!state.currentUsers.length" @click="removeFromGroup">Delete from group</button>
     </div>
-    <pre>{{ users }}</pre>
-    <pre>{{ groups }}</pre>
   </div>
 </template>
 <script lang="ts" setup>
@@ -56,7 +54,9 @@ const selectedGroupChanged = () => {
 }
 
 const removeFromGroup = () => {
+
   emit('removeFromGroup', state.currentUsers)
+  state.currentUsers = state.currentUsers.filter(userId => ( !state.currentUsers.includes(userId) ))
   getUsersOfSelectedGroup()
 }
 

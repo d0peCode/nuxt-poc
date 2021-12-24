@@ -26,7 +26,6 @@ const state = reactive({
 })
 
 const getNotAssignedUsers = (users, groups) => {
-  console.log('getNotAssignedUsers', users, groups)
   return users.filter(user => {
     for (let i = 0, l = groups.length; i < l; i++) {
       if (groups[i].usersIds.includes(user.id)) {
@@ -54,7 +53,6 @@ const assignUserToGroup = async (usersIds: string[]) => {
 }
 
 const removeFromGroup = async (usersIds: string[]) => {
-  console.log('usersIds in removeFromGroup', usersIds)
   for (let i = 0, l = usersIds.length; i < l; i++) {
     await axios.delete(
         `http://localhost:3001/groups/${state.selectedGroup}/removeUser`,
