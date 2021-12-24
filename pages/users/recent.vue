@@ -1,6 +1,11 @@
 <template>
-    <h1>recent.vue</h1>
+  <div>
+    <h1>most recent user:</h1>
+    <pre>{{ state.user }}</pre>
+  </div>
 </template>
 <script lang="ts" setup>
-console.log('log from setup, 0 boilerplate style')
+const state = reactive({
+  user: await useAsyncData('recent', () => $fetch('/api/users/recent'))
+})
 </script>

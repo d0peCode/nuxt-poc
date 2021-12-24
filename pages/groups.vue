@@ -1,9 +1,9 @@
 <template>
   <div class="row">
     <LeftPane
-        :users="state.notAssignedUsers"
-        :groups="state.groups.data"
-        @assignToGroup="assignUserToGroup"
+      :users="state.notAssignedUsers"
+      :groups="state.groups.data"
+      @assignToGroup="assignUserToGroup"
     />
     <RightPane
       :users="state.users.data"
