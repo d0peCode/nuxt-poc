@@ -1,8 +1,10 @@
 import axios, {AxiosResponse} from "axios";
 
 export interface User {
+    id: string,
     name: string,
-    favouriteColor: string
+    favouriteColor: string,
+    groupId: string
 }
 
 export default async (): Promise<AxiosResponse<User[]>> => {

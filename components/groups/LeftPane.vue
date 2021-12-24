@@ -1,31 +1,50 @@
 <template>
-  <div>
-    left pane
+  <div class="col">
+    <h1>left pane</h1>
 
-    users <pre>{{ users }}</pre>
-    groups <pre>{{ groups }}</pre>
+    <label for="selectedUsers">UnAssignedUsers</label>
+    <br />
+
+    <select id="selectedUsers" multiple v-model="state.selectedUsers">
+      <option v-for="user in users" :value="user.id">{{ user.name }}</option>
+    </select>
+    <pre>{{ state.selectedUsers }}</pre>
+    <button @click="assignToGroup" :disabled="!state.selectedUsers.length">
+      assign to group
+    </button>
   </div>
 </template>
 <script lang="ts" setup>
-import { PropType } from "vue";
+import { PropType, reactive } from "vue";
+import { User } from "@/server/api/users";
+import { Group } from "~/server/api/groups";
+const emit = defineEmits(['assignToGroup'])
 
 const props = defineProps({
   users: {
     required: true,
-    type: Array as PropType<any>
+    type: Array as PropType<User[]>
   },
   groups: {
     required: true,
-    type: Array as PropType<any>
+    type: Array as PropType<Group[]>
   }
 })
 
-const notAssignedUsers = props.users.filter(user => {
-  for (let i = 0, l = props.groups.length; i < l; i++) {
-    if (props.groups[i].usersIds.includes(user.id)) {
-      return false
-    }
-  }
-  return true
+const state = reactive({
+  selectedUsers: []
 })
+
+const assignToGroup = () => {
+  emit('assignToGroup', state.selectedUsers)
+  state.selectedUsers = []
+}
 </script>
+<style>
+.col {
+  width: 48%;
+  margin: 0 1%;
+  border: 2px solid green;
+  border-radius: 10px;
+}
+</style>
